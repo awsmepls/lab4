@@ -9,7 +9,7 @@ int main()
     cin >> n;
 
     sum = (n * (n + 1)) / 2;
-    if (sum % 2 != 0)
+    if (sum % 2 != 0 || n == 1 || n == 2)
     {
         cout << "No" << endl;
         return 0;
@@ -17,13 +17,9 @@ int main()
 
     hlaf_sum = sum / 2;
     bool* used = new bool[n + 1]();
-    for (long long i = 0; i <= n; i++)
-    {
-        used[i] = false;
-    }
 
     current_sum = 0;
-    for (i = 0; i >= 1; i--)
+    for (i = n; i >= 1; i--)
     {
         if (current_sum + i <= hlaf_sum)
         {
@@ -38,9 +34,11 @@ int main()
     if (current_sum != hlaf_sum)
     {
         cout << "No" << endl;
+        delete[] used;
         return 0;
     }
 
+    cout << "Yes" << endl;
     int countPetya = 0;
     for (i = 1; i <= n; i++)
     {
@@ -48,7 +46,7 @@ int main()
             countPetya++;
     }
 
-    cout << "Yes" << endl;
+    cout << countPetya << endl;
     for (i = 1; i <= n; i++)
     {
         if (used[i])
